@@ -32,12 +32,12 @@ MIMETYPE=$(getmimetype "$INPUTFILE")
 
 case "$MIMETYPE" in
     "image/jpeg")
-	jpegoptim --strip-all "$INPUTFILE"
-	;;
+        jpegoptim --strip-all "$INPUTFILE"
+        ;;
     "image/png")
-	optipng -o 7 "$INPUTFILE"
-	;;
+        optipng -o 7 "$INPUTFILE"
+        ;;
     *)
-	echo "Mime-Type $MIMETYPE not supported."
-	;;
+        echo "Mime-Type $MIMETYPE not supported."
+        ;;
 esac
