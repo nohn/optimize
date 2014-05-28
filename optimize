@@ -54,6 +54,8 @@ process() {
         "image/png")
             checkoptimizerinstalled $MIMETYPE optipng
             optipng -o 7 "$INPUTFILE"
+            checkoptimizerinstalled $MIMETYPE pngcrush
+            pngcrush -reduce -brute -notfilecheck "$INPUTFILE" "$INPUTFILE"
             ;;
         "text/css")
             checkoptimizerinstalled $MIMETYPE yui-compressor
