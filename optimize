@@ -35,6 +35,12 @@ process() {
     INPUTFILE="$1"
     MIMETYPE=$(getmimetype "$INPUTFILE")
     case "$MIMETYPE" in
+        "application/javascript")
+            checkoptimizerinstalled $MIMETYPE yui-compressor
+            TEMPFILE=$(tempfile)
+            yui-compressor --nomunge "$INPUTFILE" -o $TEMPFILE
+            mv $TEMPFILE "$INPUTFILE"
+            ;;
         "image/gif")
             checkoptimizerinstalled $MIMETYPE gifsicle
             TEMPFILE=$(tempfile)
@@ -48,6 +54,12 @@ process() {
         "image/png")
             checkoptimizerinstalled $MIMETYPE optipng
             optipng -o 7 "$INPUTFILE"
+            ;;
+        "text/css")
+            checkoptimizerinstalled $MIMETYPE yui-compressor
+            TEMPFILE=$(tempfile)
+            yui-compressor "$INPUTFILE" -o $TEMPFILE
+            mv $TEMPFILE "$INPUTFILE"
             ;;
         *)
             echo "Mime-Type $MIMETYPE not supported."
