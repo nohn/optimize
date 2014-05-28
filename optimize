@@ -41,6 +41,10 @@ process() {
             yui-compressor --nomunge "$INPUTFILE" -o $TEMPFILE
             mv $TEMPFILE "$INPUTFILE"
             ;;
+        "application/x-virtualbox-vdi")
+            checkoptimizerinstalled $MIMETYPE VBoxManage
+            VBoxManage modifyhd "$INPUTFILE" --compact
+            ;;
         "image/gif")
             checkoptimizerinstalled $MIMETYPE gifsicle
             TEMPFILE=$(tempfile)
@@ -84,7 +88,7 @@ while (($#)); do
     if [ -f "$1" ]; then
         process "$1"
     elif [ -d "$1" ]; then
-        for file in $(find $1 -type f); do
+        find "$1" -type f | while read file; do
             process "$file"
         done
     else
