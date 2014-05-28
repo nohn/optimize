@@ -22,19 +22,31 @@ getmimetype() {
     mimetype --output-format "%m" "$1"
 }
 
+checkoptimizerinstalled() {
+    MIMETYPE=$1
+    OPTIMIZER=$(which $2)
+    if [ ! -x "$OPTIMIZER" ]; then
+        echo "Please install $2 to optimize $1 files"
+        exit 1
+    fi
+}
+
 process() {
     INPUTFILE="$1"
     MIMETYPE=$(getmimetype "$INPUTFILE")
     case "$MIMETYPE" in
         "image/gif")
+            checkoptimizerinstalled $MIMETYPE gifsicle
             TEMPFILE=$(tempfile)
             gifsicle -O3 "$INPUTFILE" -o $TEMPFILE
             mv $TEMPFILE "$INPUTFILE"
             ;;
         "image/jpeg")
+            checkoptimizerinstalled $MIMETYPE jpegoptim
             jpegoptim --strip-all "$INPUTFILE"
             ;;
         "image/png")
+            checkoptimizerinstalled $MIMETYPE optipng
             optipng -o 7 "$INPUTFILE"
             ;;
         *)
