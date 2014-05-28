@@ -26,6 +26,11 @@ process() {
     INPUTFILE="$1"
     MIMETYPE=$(getmimetype "$INPUTFILE")
     case "$MIMETYPE" in
+        "image/gif")
+            TEMPFILE=$(tempfile)
+            gifsicle -O3 "$INPUTFILE" -o $TEMPFILE
+            mv $TEMPFILE "$INPUTFILE"
+            ;;
         "image/jpeg")
             jpegoptim --strip-all "$INPUTFILE"
             ;;
