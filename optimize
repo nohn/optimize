@@ -50,6 +50,15 @@ if [ -z "$INPUTFILE" ]; then
 fi
 
 while (($#)); do
-    process "$1"
+    if [ -f "$1" ]; then
+        process "$1"
+    elif [ -d "$1" ]; then
+        for file in $(find $1 -type f); do
+            process "$file"
+        done
+    else
+        echo "ERROR: $1 is no file or directory."
+        exit 1
+    fi
     shift
 done
