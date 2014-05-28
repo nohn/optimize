@@ -22,22 +22,34 @@ getmimetype() {
     mimetype --output-format "%m" "$1"
 }
 
+process() {
+    INPUTFILE="$1"
+    MIMETYPE=$(getmimetype "$INPUTFILE")
+    case "$MIMETYPE" in
+        "image/jpeg")
+            jpegoptim --strip-all "$INPUTFILE"
+            ;;
+        "image/png")
+            optipng -o 7 "$INPUTFILE"
+            ;;
+        *)
+            echo "Mime-Type $MIMETYPE not supported."
+            ;;
+    esac
+}
+
+if [ "$#" == "0" ]; then
+    usage
+    exit 1
+fi
+
 INPUTFILE="$1"
 if [ -z "$INPUTFILE" ]; then
     usage
     exit 1
 fi
 
-MIMETYPE=$(getmimetype "$INPUTFILE")
-
-case "$MIMETYPE" in
-    "image/jpeg")
-        jpegoptim --strip-all "$INPUTFILE"
-        ;;
-    "image/png")
-        optipng -o 7 "$INPUTFILE"
-        ;;
-    *)
-        echo "Mime-Type $MIMETYPE not supported."
-        ;;
-esac
+while (($#)); do
+    process "$1"
+    shift
+done
