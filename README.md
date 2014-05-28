@@ -13,4 +13,14 @@ pngcrush and yui-compressor.
 install requirements on Ubuntu Linux
 ------------------------------------
 
-        sudo apt-get install gifsicle jpegoptim optipng pngcrush yui-compressor
+If you like to optimize images:
+
+        sudo apt-get install gifsicle jpegoptim optipng pngcrush
+
+If you like to optimize CSS and JavaScript:
+
+        sudo apt-get yui-compressor
+
+If you like to optimize Virtual Disk Images (VDI):
+
+        sudo apt-get virtualbox
