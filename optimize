@@ -24,7 +24,7 @@ getmimetype() {
 
 checkoptimizerinstalled() {
     MIMETYPE=$1
-    OPTIMIZER=$(which $2)
+    OPTIMIZER=$(which "$2")
     if [ ! -x "$OPTIMIZER" ]; then
         echo "Please install $2 to optimize $1 files"
         exit 1
@@ -36,36 +36,36 @@ process() {
     MIMETYPE=$(getmimetype "$INPUTFILE")
     case "$MIMETYPE" in
         "application/javascript")
-            checkoptimizerinstalled $MIMETYPE yui-compressor
+            checkoptimizerinstalled "$MIMETYPE" yui-compressor
             TEMPFILE=$(tempfile)
-            yui-compressor --nomunge "$INPUTFILE" -o $TEMPFILE
-            mv $TEMPFILE "$INPUTFILE"
+            yui-compressor --nomunge "$INPUTFILE" -o "$TEMPFILE"
+            mv "$TEMPFILE" "$INPUTFILE"
             ;;
         "application/x-virtualbox-vdi")
-            checkoptimizerinstalled $MIMETYPE VBoxManage
+            checkoptimizerinstalled "$MIMETYPE" VBoxManage
             VBoxManage modifyhd "$INPUTFILE" --compact
             ;;
         "image/gif")
-            checkoptimizerinstalled $MIMETYPE gifsicle
+            checkoptimizerinstalled "$MIMETYPE" gifsicle
             TEMPFILE=$(tempfile)
-            gifsicle -O3 "$INPUTFILE" -o $TEMPFILE
-            mv $TEMPFILE "$INPUTFILE"
+            gifsicle -V -O3 "$INPUTFILE" -o "$TEMPFILE"
+            mv "$TEMPFILE" "$INPUTFILE"
             ;;
         "image/jpeg")
-            checkoptimizerinstalled $MIMETYPE jpegoptim
+            checkoptimizerinstalled "$MIMETYPE" jpegoptim
             jpegoptim --strip-all "$INPUTFILE"
             ;;
         "image/png")
-            checkoptimizerinstalled $MIMETYPE optipng
+            checkoptimizerinstalled "$MIMETYPE" optipng
             optipng -o 7 "$INPUTFILE"
-            checkoptimizerinstalled $MIMETYPE pngcrush
+            checkoptimizerinstalled "$MIMETYPE" pngcrush
             pngcrush -reduce -brute -notfilecheck "$INPUTFILE" "$INPUTFILE"
             ;;
         "text/css")
-            checkoptimizerinstalled $MIMETYPE yui-compressor
+            checkoptimizerinstalled "$MIMETYPE" yui-compressor
             TEMPFILE=$(tempfile)
-            yui-compressor "$INPUTFILE" -o $TEMPFILE
-            mv $TEMPFILE "$INPUTFILE"
+            yui-compressor "$INPUTFILE" -o "$TEMPFILE"
+            mv "$TEMPFILE" "$INPUTFILE"
             ;;
         *)
             echo "Mime-Type $MIMETYPE not supported."
