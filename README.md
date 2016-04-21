@@ -4,13 +4,14 @@ about
 optimize is a wrapper around various file size optimization tools. It
 currently losslessly optimizes these mime types:
 
-application/javascript
-application/x-virtualbox-vdi
-image/gif
-image/jpeg
-image/png
-image/x-apple-ios-png
-text/css
+* application/javascript
+* application/x-virtualbox-vdi
+* image/gif
+* image/jpeg
+* image/png
+* image/x-apple-ios-png
+* text/css
+* text/html
 
 requirements
 ============

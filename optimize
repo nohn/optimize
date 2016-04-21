@@ -69,6 +69,12 @@ process() {
             yui-compressor "$INPUTFILE" -o "$TEMPFILE"
             mv "$TEMPFILE" "$INPUTFILE"
             ;;
+        "text/html")
+            checkoptimizerinstalled "$MIMETYPE" yui-compressor
+            TEMPFILE=$(tempfile)
+            yui-compressor --type css --nomunge  "$INPUTFILE" -o "$TEMPFILE"
+            mv "$TEMPFILE" "$INPUTFILE"
+            ;;
         *)
             echo "Mime-Type $MIMETYPE not supported."
             ;;
