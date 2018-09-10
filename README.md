@@ -28,8 +28,8 @@ If you like to optimize images:
 
 If you like to optimize CSS and JavaScript:
 
-        sudo apt-get yui-compressor
+        sudo apt-get install yui-compressor
 
 If you like to optimize Virtual Disk Images (VDI):
 
-        sudo apt-get virtualbox
+        sudo apt-get install virtualbox
