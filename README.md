@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnohn%2Foptimize.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnohn%2Foptimize?ref=badge_shield)
+
 about
 =====
 
@@ -33,3 +35,7 @@ If you like to optimize CSS and JavaScript:
 If you like to optimize Virtual Disk Images (VDI):
 
         sudo apt-get install virtualbox
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnohn%2Foptimize.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnohn%2Foptimize?ref=badge_large)
